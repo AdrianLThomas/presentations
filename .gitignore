@@ -1,3 +1,3 @@
 # slide output
 slides/**/*.html 
-build/index.html
+build

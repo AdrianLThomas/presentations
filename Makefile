@@ -14,15 +14,15 @@ build-slides:
 		'npx @marp-team/marp-cli@latest "$$1" --html -o "$(BUILD_DIR)/$$(basename "$$1" .md).html"' _ {} \;
 
 build-index:
-	@echo "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Slides</title></head><body>" > $(BUILD_DIR)/build-index.html
-	@echo "<h1>Slides</h1><ul>" >> $(BUILD_DIR)/build-index.html
+	@echo "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Slides</title></head><body>" > $(BUILD_DIR)/index.html
+	@echo "<h1>Slides</h1><ul>" >> $(BUILD_DIR)/index.html
 	@for f in $(BUILD_DIR)/*.html; do \
 		name=$$(basename $$f); \
-		if [ "$$name" != "build-index.html" ]; then \
-			echo "<li><a href=\"$$name\">$$name</a></li>" >> $(BUILD_DIR)/build-index.html; \
+		if [ "$$name" != "index.html" ]; then \
+			echo "<li><a href=\"$$name\">$$name</a></li>" >> $(BUILD_DIR)/index.html; \
 		fi \
 	done
-	@echo "</ul></body></html>" >> $(BUILD_DIR)/build-index.html
+	@echo "</ul></body></html>" >> $(BUILD_DIR)/index.html
 
 clean:
 	rm -rf $(BUILD_DIR)

@@ -74,6 +74,14 @@ TODO - does this fit here? the context is once we already had our tests running 
 
 ---
 
+TODO - where does this anecdote fit?
+
+*Anecdote: Pre go-live: CPU Throttling*
+
+<!-- The service was operating normally under our manual and automated testing (integration tests) on staging. When we started to load test, we unravelled K8S configuration that plagued not only our service but other services too, that meant even though the K8S cluster had CPU capacity to handle the additional load, AND our service scaled out to 10 instances, our service would still be throttled and perform poorly. -->
+
+---
+
 # Question
 
 > Q: Why bother load testing at all? why not just let the users test in production with real traffic and real hardware?

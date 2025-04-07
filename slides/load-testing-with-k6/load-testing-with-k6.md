@@ -106,20 +106,39 @@ _Time for questions at the end - or grab me in the pub after_
 
 - K6 itself is written in Go
 - But you write test scripts in Javascript
-- "A JavaScript engine written in Go. k6 binaries are embedded with Sobek, enabling test scripting in JavaScript."
+- Sobek executes the Javascript: "A JavaScript engine written in Go. k6 binaries are embedded with Sobek, enabling test scripting in JavaScript."
 - i.e. simulating 10 users testing your website === 10 instances of Sobek running your script at a time
+- You don't need to worry about the parallelism in code
 
 *https://grafana.com/docs/k6/latest/reference/glossary/#sobek*
 > 
 
 ---
 
-# Quickstart: Simple example
-CLI example and output too
+# Quickstart: Installing & Running a Test
 
-Show some code, and it's output... demo its simplicity
+```sh
+brew install k6 # macos
+choco install k6 # windows 
 
-... TODO something about how the parallelism is handled - you don't need to worry about that aspect in JS.
+k6 run script.js # run the test script
+```
+
+---
+
+# Quickstart: What Does the Test Script Look Like?
+
+```javascript
+// TODO
+```
+
+---
+
+# Quickstart: Test Output
+
+```sh
+# TODO
+```
 
 ---
 

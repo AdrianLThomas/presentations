@@ -6,11 +6,15 @@ keywords: load testing, k6, javascript, go, golang
 url: https://www.adrian-thomas.com
 ---
 
+<!-- footer: adrian-thomas.com -->
+
 # DRAFT
 
 These slides are **IN PROGRESS**. If you're reading this, they probably don't quite make sense yet as I've not finished!
 
 Continue at your own risk...
+
+
 
 ---
 

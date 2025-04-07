@@ -25,6 +25,8 @@ TODO
     - Gotchas / Best Practice / Advanced Use Cases
 - This talk is mainly focused towards engineers (SWE, SDET, Platform) who may be launching a new service soon, or wish to retrospectively add load to their service (before your users do it for you!).
 
+Disclaimer: Not respresenting any company, all views are my own, this is based on personal experience, etc etc.
+
 TODO - can I add QR code / footer throughout?
 
 ---
@@ -105,8 +107,8 @@ _Time for questions at the end - or grab me in the pub after_
 # K6 - Execution Engine
 
 - K6 itself is written in Go
-- But you write test scripts in Javascript
-- Sobek executes the Javascript: "A JavaScript engine written in Go. k6 binaries are embedded with Sobek, enabling test scripting in JavaScript."
+- Test scripts in Javascript
+- Executed in Go: Sobek (an engine to execute JS in Go)
 - i.e. simulating 10 users testing your website === 10 instances of Sobek running your script at a time
 - You don't need to worry about the parallelism in code
 
@@ -115,13 +117,11 @@ _Time for questions at the end - or grab me in the pub after_
 
 ---
 
-# Quickstart: Installing & Running a Test
+# Quickstart: Installing
 
 ```sh
 brew install k6 # macos
 choco install k6 # windows 
-
-k6 run script.js # run the test script
 ```
 
 ---
@@ -129,18 +129,100 @@ k6 run script.js # run the test script
 # Quickstart: What Does a Simple Test Script Look Like?
 
 ```javascript
-// TODO - barebones!
+import http from 'k6/http';
+import { sleep } from 'k6';
+
+export const options = {
+  iterations: 10,
+};
+
+export default function () {
+  http.get('https://quickpizza.grafana.com');
+
+  sleep(1);
+}
 ```
 
-<!-- K6 can do so much, but it doesn't need to be complicated -->
+Any guesses for how long this test takes to execute?
+
+*Source: https://grafana.com/docs/k6/latest/get-started/write-your-first-test/*
+
+<!-- 
+
+Explain each line (imports, iterations, how the func gets called)
+
+Note: no "await" on the get!
+
+Function is called 10 times, but sleeps 1 second each time. So the total test time is ~10 seconds.
+
+No VUs configured, so just one user.
+
+K6 can do so much, but it doesn't need to be complicated.
+
+
+-->
+
+---
+
+# Quickstart: Running a test
+
+```sh
+k6 run script.js
+```
 
 ---
 
 # Quickstart: Test Output
 
-```sh
-# TODO
 ```
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+     execution: local
+        script: scripts/simple-example.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 1 max VUs, 10m30s max duration (incl. graceful stop):
+              * default: 10 iterations shared among 1 VUs (maxDuration: 10m0s, gracefulStop: 30s)
+
+
+  █ TOTAL RESULTS 
+
+    HTTP
+    http_req_duration.......................................................: avg=106.66ms min=100.36ms med=107.64ms max=114.69ms p(90)=111.55ms p(95)=113.12ms
+      { expected_response:true }............................................: avg=106.66ms min=100.36ms med=107.64ms max=114.69ms p(90)=111.55ms p(95)=113.12ms
+    http_req_failed.........................................................: 0.00%  0 out of 10
+    http_reqs...............................................................: 10     0.878629/s
+
+    EXECUTION
+    iteration_duration......................................................: avg=1.13s    min=1.1s     med=1.1s     max=1.37s    p(90)=1.16s    p(95)=1.26s   
+    iterations..............................................................: 10     0.878629/s
+    vus.....................................................................: 1      min=1       max=1
+    vus_max.................................................................: 1      min=1       max=1
+
+    NETWORK
+    data_received...........................................................: 32 kB  2.8 kB/s
+    data_sent...............................................................: 1.0 kB 92 B/s
+
+
+
+
+running (00m11.4s), 0/1 VUs, 10 complete and 0 interrupted iterations
+```
+
+<!-- 
+Note: A few things going on. 
+
+Notable: 
+    http_req_dur
+    http_req_failed
+
+    runtime at bottom
+ -->
 
 ---
 

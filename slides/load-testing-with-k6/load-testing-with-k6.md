@@ -102,12 +102,15 @@ _Time for questions at the end - or grab me in the pub after_
 
 ---
 
-# K6 - As an execution engine
+# K6 - Execution Engine
 
 - K6 itself is written in Go
 - But you write test scripts in Javascript
-- JS is executed in Goja (not V8 like Node.js, so it's more limited)
-- K6 spins up a Goja instance for each Virtual User (VU) (i.e. simulating 10 users testing your website === 10 instances of Goja running your script at a time)
+- "A JavaScript engine written in Go. k6 binaries are embedded with Sobek, enabling test scripting in JavaScript."
+- i.e. simulating 10 users testing your website === 10 instances of Sobek running your script at a time
+
+*https://grafana.com/docs/k6/latest/reference/glossary/#sobek*
+> 
 
 ---
 

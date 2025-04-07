@@ -126,11 +126,13 @@ k6 run script.js # run the test script
 
 ---
 
-# Quickstart: What Does the Test Script Look Like?
+# Quickstart: What Does a Simple Test Script Look Like?
 
 ```javascript
-// TODO
+// TODO - barebones!
 ```
+
+<!-- K6 can do so much, but it doesn't need to be complicated -->
 
 ---
 
@@ -204,6 +206,10 @@ FAQ: What's good/bad? A: it depends on your own definition and SLA's defined.
 - Try to simulate existing traffic patterns - e.g. if distribute the load between endpoints that are hit frequently and less frequently in production with real traffic.
     - FAQ: you can do this by looking at your existing observability data.
 
+--- 
+
+# Resources
+- https://grafana.com/docs/k6/latest/
 
 ---
 

@@ -68,6 +68,8 @@ p {
 
 *Anecdote: Bad dependabot update*
 
+TODO - does this fit here? the context is once we already had our tests running in CI and things were relatively stable... we THEN spotted this once the change was introduced.
+
 <!-- Dependabot automatically merged a minor patch OTEL update to a bunch of repos. It was difficult to see what change introduced it (particularly when the investigation started days later). The performance tests for my little service helped me narrow this down (git bisect style) and fix a bunch of performance issues for multiple teams and services that were impacting production across the organization. -->
 
 ---

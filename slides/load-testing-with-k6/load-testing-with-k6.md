@@ -25,6 +25,8 @@ TODO
     - Gotchas / Best Practice / Advanced Use Cases
 - This talk is mainly focused towards engineers (SWE, SDET, Platform) who may be launching a new service soon, or wish to retrospectively add load to their service (before your users do it for you!).
 
+- Out of scope: K6 Browser, Grafana Cloud, and a bunch of other more advance use cases.
+
 Disclaimer: Not respresenting any company, all views are my own, this is based on personal experience, etc etc.
 
 TODO - can I add QR code / footer throughout?
@@ -128,6 +130,8 @@ choco install k6 # windows
 
 # Quickstart: What Does a Simple Test Script Look Like?
 
+<!-- Consider: Skipping the next slides in favour of a live demo. -->
+
 ```javascript
 import http from 'k6/http';
 import { sleep } from 'k6';
@@ -153,9 +157,11 @@ Explain each line (imports, iterations, how the func gets called)
 
 Note: no "await" on the get!
 
+No VUs configured, so just one user.
+
 Function is called 10 times, but sleeps 1 second each time. So the total test time is ~10 seconds.
 
-No VUs configured, so just one user.
+If we had 10 VUs then it would spend those 10 iterations sooner (so execution would be ~1s)
 
 K6 can do so much, but it doesn't need to be complicated.
 
@@ -226,17 +232,42 @@ Notable:
 
 ---
 
-# Core Concepts
-- Virtual Users (VUs)
-- Scenarios and stages
-- Thresholds and checks
-- Metrics (http_req_duration, iterations, etc.)
+# Core Concepts - Virtual Users (VUs)
+- VUs just represent a user hitting your endpoint
+- If you have 10 VUs then you have 10 users running the script at once
+TODO
+
+---
+
+# Core Concepts - Scenarios and Stages
+TODO
+
+
+
+---
+
+# Core Concepts - Thresholds and Checks
+
+TODO
+
+---
+
+# Core Concepts - Metrics
+
+TODO
+
+CLI output not to necessarily be trusted (you may want to store the logs as artifacts in your CI), but your actual server metrics may be a better source of truth. Gives you the other side of the story if anything funky is going on.
+
+You can also feed them in to AWS CloudWatch, New Relic, Promethesus... etc etc - but may not be necessary if you already have something setup.
+
+TODO some useful things to be looking for? (p95, request duration.......)
+but when digging deeper: CPU, RAM, throughput, DB load... etc.
 
 ---
 
 # Live Walkthrough and Demo
-- Show a couple of examples.... show the code, show it running
-- Test against a simple API in Cloudflare?
+- Already shown a basic example. Live demo of a heavier one? over wifi? dare I?
+- Take a look at some of the traffic in Cloudflare.... and the graphs..
 
 ---
 

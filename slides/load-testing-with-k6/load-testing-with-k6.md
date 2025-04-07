@@ -14,7 +14,7 @@ Continue at your own risk...
 
 ---
 
-# Intro
+# Load Testing with K6
 TODO
 - Who am I? - Website, LinkedIn, etc (QR code)
 - What do I do?
@@ -48,7 +48,7 @@ p {
 
 ---
 
-# Why Load Test? pt 1.
+# Why Load Test?
 
 - Perhaps about to launch a new service
 - Or expecting a significant jump in traffic for an event
@@ -57,7 +57,7 @@ p {
 
 ---
 
-# Why Load Test? pt 2.
+# Load Testing Use Cases
 
 - Whatever the reason: it helps you understand:
     - how far your current implementation will take you
@@ -90,19 +90,24 @@ TODO - where does this anecdote fit?
 
 ---
 
-# Use Cases
-- Preparing for a launch
-    - e.g. launching a new service (anecdote)
-- Monitor for regressions
-    - Anecdotes
+# K6 - In this talk
+
+- I'll be talking about K6 (https://k6.io)
+- It's a free, and open source load testing tool (by Grafana Labs)
+- There are other tools out there
+
+_Time for questions at the end - or grab me in the pub after_
+
+<!-- I'll be talking about the free, open source product, not the cloud offering -->
 
 ---
 
-# K6
-- K6: One liner, what is it?
-- K6: I'll be talking about the free, open source product, not the cloud offerings
+# K6 - As an execution engine
 
-- _There will be some time at the end for questions - or grab me in the pub after_
+- K6 itself is written in Go
+- But you write test scripts in Javascript
+- JS is executed in Goja (not V8 like Node.js, so it's more limited)
+- K6 spins up a Goja instance for each Virtual User (VU) (i.e. simulating 10 users testing your website === 10 instances of Goja running your script at a time)
 
 ---
 
@@ -110,6 +115,8 @@ TODO - where does this anecdote fit?
 CLI example and output too
 
 Show some code, and it's output... demo its simplicity
+
+... TODO something about how the parallelism is handled - you don't need to worry about that aspect in JS.
 
 ---
 

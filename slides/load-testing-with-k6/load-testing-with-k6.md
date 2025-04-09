@@ -58,6 +58,10 @@ img {
 
 ---
 
+Disclaimer: I am not representing any company. This talk is based on my own personal experiences and all views are my own only.
+
+---
+
 # Load Testing with K6
 - What you will learn
     - What performance testing is
@@ -67,10 +71,6 @@ img {
 - This talk is mainly focused towards engineers (SWE, SDET, Platform) who may be launching a new service soon, or wish to retrospectively add load to their service (before your users do it for you!).
 
 - Out of scope: K6 Browser, Grafana Cloud, and a bunch of other more advance use cases.
-
-Disclaimer: Not respresenting any company, all views are my own, this is based on personal experience, etc etc.
-
-TODO - can I add QR code / footer throughout?
 
 ---
 
@@ -87,7 +87,7 @@ p {
   font-size: 0.5em;
 }
 </style>
-
+<!-- TODO - bug with images on rendered website? -->
 ![height:200px](./images/test-types.png)
 *Source: https://grafana.com/docs/k6/latest/testing-guides/test-types/*
 

@@ -4,9 +4,18 @@ description: Learn how to use K6 to proactively catch performance issues, uncove
 author: Adrian L Thomas
 keywords: load testing, k6, javascript, go, golang
 url: https://www.adrian-thomas.com
+style: |
+  h1,h2,h3 {
+        text-align: center;
+    }
+  a {
+        text-decoration: inherit;
+        color: inherit;
+        cursor: auto;
+    }
 ---
 
-<!-- footer: adrian-thomas.com -->
+
 
 # DRAFT
 
@@ -18,10 +27,38 @@ Continue at your own risk...
 
 ---
 
+<!-- 
+    footer: hello@adrian-thomas.com
+-->
+
+<style scoped>
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+
 # Load Testing with K6
-TODO
-- Who am I? - Website, LinkedIn, etc (QR code)
-- What do I do?
+
+### Adrian L Thomas, MEng
+
+![width:200px](./images/linkedin-qr-code.png)
+
+---
+
+<!-- paginate: true -->
+
+# Who?
+
+- Generalist Software Engineer
+- Done a bunch of roles: SWE, Team Lead, Staff Engineer...
+- Worked across a bunch of technologies (too many to list!)
+- Talk to me in the pub about: cars, running, pizza, or any of the above..
+
+---
+
+# Load Testing with K6
 - What you will learn
     - What performance testing is
     - Why to performance test
@@ -51,7 +88,7 @@ p {
 }
 </style>
 
-![height:200px](./test-types.png)
+![height:200px](./images/test-types.png)
 *Source: https://grafana.com/docs/k6/latest/testing-guides/test-types/*
 
 ---

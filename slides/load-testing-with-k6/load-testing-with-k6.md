@@ -51,7 +51,7 @@ img {
 
 # Who?
 
-- Generalist Software Engineer
+- Generalist Software Engineer ~13 years professional experience
 - Done a bunch of roles: SWE, Team Lead, Staff Engineer...
 - Worked across a bunch of technologies (too many to list!)
 - Talk to me in the pub about: cars, running, pizza, or any of the above..
@@ -62,7 +62,8 @@ Disclaimer: I am not representing any company. This talk is based on my own pers
 
 ---
 
-# Load Testing with K6
+# What you will learn
+TODO !!!!
 - What you will learn
     - What performance testing is
     - Why to performance test

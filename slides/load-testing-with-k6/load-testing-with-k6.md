@@ -339,6 +339,8 @@ FAQ: - Why reset the environment each time? if it slows down over time isn't tha
 - Ideally every night (cron / nightly pipeline)
 - You might decide to do it more regularly: but caution should be applied.. you may disrupt your colleagues (if a shared environment) / or it may be expensive!
 
+TODO show example GHA snippet
+
 ---
 
 # Example Output & Metrics (skip time depending)

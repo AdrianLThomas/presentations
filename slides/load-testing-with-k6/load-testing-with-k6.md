@@ -122,38 +122,29 @@ p {
 
 # Load Testing Use Cases
 
-- Whatever the reason: it helps you understand:
+- Whatever the reason, it helps you understand:
     - how far your current implementation will take you
     - where the system bends
     - what your scaling challenges may be
 
 ---
 
-*Anecdote: Bad dependabot update*
 
-TODO - does this fit here? the context is once we already had our tests running in CI and things were relatively stable... we THEN spotted this once the change was introduced.
+*Anecdote: Pre go-live (CPU Throttling)*
 
-<!-- Dependabot automatically merged a minor patch OTEL update to a bunch of repos. It was difficult to see what change introduced it (particularly when the investigation started days later). The performance tests for my little service helped me narrow this down (git bisect style) and fix a bunch of performance issues for multiple teams and services that were impacting production across the organization. -->
+<!-- 
+  Before I start digging in to the code:  I want to give a little anecdote.
 
----
+  I worked on a team with a service that was operating normally under our manual and automated testing (integration tests) on staging. 
 
-TODO - where does this anecdote fit?
+  When we introduced the load test, almost immediately we unravelled a throttling issue. After some inspection we noticed that the K8S configuration that plagued not only our service but other services too, meant even though the K8S cluster had CPU capacity to handle the additional load, AND our service scaled out, our service would still be throttled and perform poorly. 
 
-*Anecdote: Pre go-live: CPU Throttling*
-
-<!-- The service was operating normally under our manual and automated testing (integration tests) on staging. When we started to load test, we unravelled K8S configuration that plagued not only our service but other services too, that meant even though the K8S cluster had CPU capacity to handle the additional load, AND our service scaled out to 10 instances, our service would still be throttled and perform poorly. -->
-
----
-
-# Question
-
-> Q: Why bother load testing at all? why not just let the users test in production with real traffic and real hardware?
-
-<!-- A: You could... but if it breaks, it's too late. You're in panic mode to try and fix it! The idea is to understand your limits before you get there (and this also helps you setup any alerting accordingly) -->
+  So even just getting started was worthwhile! and I'll be mention some of the other benefits discovered as we get more involved.
+-->
 
 ---
 
-# K6 - In this talk
+# This talk
 
 - I'll be talking about K6 (https://k6.io)
 - It's a free, and open source load testing tool (by Grafana Labs)
@@ -169,9 +160,8 @@ _Time for questions at the end - or grab me in the pub after_
 
 - K6 itself is written in Go
 - Test scripts in Javascript
-- Executed in Go: Sobek (an engine to execute JS in Go)
-- i.e. simulating 10 users testing your website === 10 instances of Sobek running your script at a time
-- You don't need to worry about the parallelism in code
+- Uses Sobek (an engine to execute JS in Go)
+- i.e. simulating 10 users testing your website === 10 instances of Sobek running your JS script at a time
 
 *https://grafana.com/docs/k6/latest/reference/glossary/#sobek*
 > 
@@ -294,7 +284,26 @@ Notable:
 # Core Concepts - Virtual Users (VUs)
 - VUs just represent a user hitting your endpoint
 - If you have 10 VUs then you have 10 users running the script at once
-TODO
+- Or, 10 instances of your test script running at once
+
+---
+
+# Core Concepts - Virtual Users (VUs)
+
+```javascript
+import http from 'k6/http';
+import { sleep } from 'k6';
+
+export const options = {
+  vus: 10,
+};
+
+export default function () {
+  http.get('https://quickpizza.grafana.com');
+
+  sleep(1);
+}
+```
 
 ---
 
@@ -393,3 +402,15 @@ FAQ: What's good/bad? A: it depends on your own definition and SLA's defined.
 - Can find the slides here: (short url & QR code)
 - Links to further reading
 - Q&A
+
+
+
+---
+
+*Anecdote: Bad dependabot update*
+
+<!-- Context: Once our tests were running nightly in CI, and things were stable. One morning, we spotted a performance drop. Git bisecting the issue and re-running the load tests helped me identify the issue, which was also impacting a bunch of other services and teams across the organization. It was a minor OTEL update dependabot introduced! -->
+
+TODO - does this fit here?
+
+---

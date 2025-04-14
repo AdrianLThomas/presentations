@@ -348,6 +348,8 @@ export default function () {
 
 **A failing check does NOT equate to a failing test.**
 
+<!-- TODO clarify: if it doesn't fail then what's the point? -->
+
 ---
 
 # Core Concepts - Checks & Thresholds

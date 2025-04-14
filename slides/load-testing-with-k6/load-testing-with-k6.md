@@ -171,7 +171,8 @@ _Time for questions at the end - or grab me in the pub after_
 
 ```sh
 brew install k6 # macos
-choco install k6 # windows 
+choco install k6 # windows
+snap install k6 # ubuntu
 ```
 
 ---
@@ -414,7 +415,8 @@ If you spot issues, you'll likely want to check your service:
 
   Take a look at some graphs in Cloudflare
 
-  TODO - take some screenshots as backup  
+  Backup screenshot: `images/cloudflare-workers-dashboard.png` 
+
 
   Demonstrate:
   - Threshold is 95% of checks should pass, as service only errors 1% only of the time.

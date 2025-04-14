@@ -374,16 +374,26 @@ export default function () {
 
 ---
 
-# Core Concepts - Metrics
+# Metrics
 
-TODO
+Whilst K6 does report some metrics in the CLI output, it's likely that you will want to track these over time.
 
-CLI output not to necessarily be trusted (you may want to store the logs as artifacts in your CI), but your actual server metrics may be a better source of truth. Gives you the other side of the story if anything funky is going on.
+If you're already tracking your service metrics (e.g. AWS Cloudwatch, New Relic, etc), then great.
 
-You can also feed them in to AWS CloudWatch, New Relic, Promethesus... etc etc - but may not be necessary if you already have something setup.
+Otherwise you might want to look at integrating that to monitor and alert over time (out of scope for this talk!).
 
-TODO some useful things to be looking for? (p95, request duration.......)
-but when digging deeper: CPU, RAM, throughput, DB load... etc.
+*Warning*: The metrics K6 output will probably be different than your metrics platform (client reporting vs server reporting).
+
+You'll likely want to keep an eye on:
+- P95/P99 response duration
+- Error rate
+
+If you spot issues, you'll likely be looking at your service:
+- Scaling (up / out)
+- CPU utilization
+- RAM utilization
+- DB load
+- etc
 
 ---
 

@@ -389,7 +389,7 @@ export default function () {
 # Metrics to Investigate
 
 If there's an issue, you'll probably want to keep an eye on:
-- P95/P99 response duration
+- P95 response duration
 - Error rate
 
 If you spot issues, you'll likely be looking at your service:
@@ -406,9 +406,14 @@ If you spot issues, you'll likely be looking at your service:
 # Live Walkthrough and Demo
 
 <!-- 
-  Show some code of a simple service and simple API test
+  Show some code of a simple service and API test
 
   Take a look at some graphs in Cloudflare
+
+  TODO - take some screenshots as backup  
+
+  Demonstrate:
+  - Threshold is 95% of checks should pass, as service only errors 1% only of the time.
  -->
 
 ---

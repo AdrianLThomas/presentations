@@ -374,17 +374,21 @@ export default function () {
 
 ---
 
-# Metrics
+# Metric Reporting
 
-Whilst K6 does report some metrics in the CLI output, it's likely that you will want to track these over time.
+- K6 reports some metrics in the CLI output, it's likely that you will want to track these over time.
 
-If you're already tracking your service metrics (e.g. AWS Cloudwatch, New Relic, etc), then great.
+- If you're already tracking your service metrics (e.g. AWS Cloudwatch, New Relic, etc), then great.
 
-Otherwise you might want to look at integrating that to monitor and alert over time (out of scope for this talk!).
+- Otherwise you might want to look at integrating that to monitor and alert over time (out of scope for this talk!).
 
 *Warning*: The metrics K6 output will probably be different than your metrics platform (client reporting vs server reporting).
 
-You'll likely want to keep an eye on:
+---
+
+# Metrics to Investigate
+
+If there's an issue, you'll probably want to keep an eye on:
 - P95/P99 response duration
 - Error rate
 
@@ -395,11 +399,17 @@ If you spot issues, you'll likely be looking at your service:
 - DB load
 - etc
 
+<!-- It's important to have visibility of that too -->
+
 ---
 
 # Live Walkthrough and Demo
-- Already shown a basic example. Live demo of a heavier one? over wifi? dare I?
-- Take a look at some of the traffic in Cloudflare.... and the graphs..
+
+<!-- 
+  Show some code of a simple service and simple API test
+
+  Take a look at some graphs in Cloudflare
+ -->
 
 ---
 

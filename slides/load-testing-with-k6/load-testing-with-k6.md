@@ -317,7 +317,7 @@ export function setup() {
 }
 
 export default function (data) {
-  // 3. VU code, REQUIRED, e.g. hit endpoint with some data
+  // 3. VU code, REQUIRED, your test - e.g. hit endpoint with some data
 }
 
 export function teardown(data) {

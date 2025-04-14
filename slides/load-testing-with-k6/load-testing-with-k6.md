@@ -52,7 +52,7 @@ img {
 # Who?
 
 - Generalist Software Engineer ~13 years professional experience
-- Done a bunch of roles: SWE, Team Lead, Staff Engineer...
+- Had a bunch of roles: SWE, Team Lead, Staff Engineer...
 - Worked across a bunch of technologies (too many to list!)
 - Talk to me in the pub about: cars, running, pizza, or any of the above..
 
@@ -63,21 +63,38 @@ Disclaimer: I am not representing any company. This talk is based on my own pers
 ---
 
 # What you will learn
-TODO !!!!
-- What you will learn
-    - What performance testing is
-    - Why to performance test
-    - K6: What it is, what you can do with it, getting up and running...
-    - Gotchas / Best Practice / Advanced Use Cases
-- This talk is mainly focused towards engineers (SWE, SDET, Platform) who may be launching a new service soon, or wish to retrospectively add load to their service (before your users do it for you!).
 
-- Out of scope: K6 Browser, Grafana Cloud, and a bunch of other more advance use cases.
+- What performance testing is
+- Why performance test
+- K6: What it is, what you can do with it, getting up and running...
+- Some anecdotes
+- Gotchas & best practices
+
+---
+
+# You won't learn
+
+- K6 Browser
+- Grafana Cloud
+- Distributed tests
+- Synthetic monitoring
+- gRPC
+- ( but hopefully that gives you a taste of the feature-set! )
+
+---
+
+# Who is this talk for?
+
+Mainly focused towards engineers and leaders.
+
+e.g. those who may be launching a new service soon, or, wish to retrospectively load test their service (before your users do it for you!).
 
 ---
 
 # What is a Load Test?
+
 - It's literally a test that puts network load on your system
-- Usually simulating beyond the traffic that you are expecting to receive, and observe whether the system will cope
+- Usually simulating traffic beyond that you are expecting to receive, and observe whether the system will cope
 
 ---
 
@@ -89,7 +106,7 @@ p {
 }
 </style>
 <!-- TODO - bug with images on rendered website? -->
-![height:200px](./images/test-types.png)
+![height:300px](./images/test-types.png)
 *Source: https://grafana.com/docs/k6/latest/testing-guides/test-types/*
 
 ---
@@ -99,7 +116,7 @@ p {
 - Perhaps about to launch a new service
 - Or expecting a significant jump in traffic for an event
 - Maybe you're expecting a slow and gentle increase...
-- Or you just want to ensure performance remains the same over time (e.g. no regressions introduced)
+- Or you just want to ensure no performance regressions are introduced
 
 ---
 

@@ -327,9 +327,50 @@ export function teardown(data) {
 
 ---
 
-# Core Concepts - Thresholds and Checks
+# Core Concepts - Checks & Thresholds
 
-TODO
+## Checks
+
+- Boolean condition, e.g. status should be 200
+- Body should include a string
+
+```javascript
+import { check } from 'k6';
+import http from 'k6/http';
+
+export default function () {
+  const res = http.get('http://test.k6.io/');
+  check(res, {
+    'is status 200': (r) => r.status === 200,
+    'verify homepage text': (r) => r.body.includes('Collection of simple web-pages suitable for load testing'),
+  });
+}
+```
+
+**A failing check does NOT equate to a failing test.**
+
+---
+
+# Core Concepts - Checks & Thresholds
+
+## Thresholds
+
+```javascript
+import http from 'k6/http';
+
+export const options = {
+  thresholds: {
+    http_req_failed: ['rate<0.01'], // http errors should be less than 1%
+    http_req_duration: ['p(95)<200'], // 95% of requests should be below 200ms
+  },
+};
+
+export default function () {
+  http.get('https://quickpizza.grafana.com');
+}
+```
+
+**A failing threshold DOES equate to a failing test**. It will return a non-zero exit code.
 
 ---
 
@@ -395,7 +436,8 @@ FAQ: What's good/bad? A: it depends on your own definition and SLA's defined.
 
 # Gotchas (to look out for)
 - Load tests running against a CDN
-- Warm up time (to scale) in tests.
+- Warm up time (to scale) in tests
+- Response times reported by K6 may be slightly different to those reported by your monitoring system.
 
 # Best Practices / Advanced (skip time depending)
 - Write tests scripts to be reusable: make use of env vars (so you can run them locally or in other environments)
@@ -414,6 +456,7 @@ FAQ: What's good/bad? A: it depends on your own definition and SLA's defined.
 - Reiterate who I am (also I'll be available in May!)
 - Can find the slides here: (short url & QR code)
 - Links to further reading
+  - Lots of the code stolen directly from the K6 docs! So you can find most of it there!
 - Q&A
 
 

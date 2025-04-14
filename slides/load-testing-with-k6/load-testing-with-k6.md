@@ -105,7 +105,6 @@ p {
   font-size: 0.5em;
 }
 </style>
-<!-- TODO - bug with images on rendered website? -->
 ![height:300px](./images/test-types.png)
 *Source: https://grafana.com/docs/k6/latest/testing-guides/test-types/*
 
@@ -355,6 +354,9 @@ export default function () {
 
 ## Thresholds
 
+<!-- - Typically SLO's you'd like to report on, e.g. <1% of requests should error
+- or 95% of requests should be below 200ms -->
+
 ```javascript
 import http from 'k6/http';
 
@@ -392,8 +394,8 @@ If there's an issue, you'll probably want to keep an eye on:
 - P95 response duration
 - Error rate
 
-If you spot issues, you'll likely be looking at your service:
-- Scaling (up / out)
+If you spot issues, you'll likely want to check your service:
+- Is scaling (up / out)
 - CPU utilization
 - RAM utilization
 - DB load
@@ -419,20 +421,52 @@ If you spot issues, you'll likely be looking at your service:
 ---
 
 # Preparing a Test Environment
-TODO - section may be a bit too much..
-- Setting it up proper, things you need to think about....
-- Writing the tests are actually only a small part of it
-- Getting a reusable environment in a shape you can use for testing can be a time consuming aspect
 
-- Think about: scenarios you want to test
-- Endpoints? Read only? Writes too? If you're mutating data you may need a way to reset the test environment so subsequent runs are not influenced by prior runs.
-- Do you know how much traffic you can expect? multiply it by 10 (early warning system!)
+- This could be the most time consuming part of getting setup, depending on what you're testing
+- As you've seen, the test scripts themselves can be quite simple
+- Hitting a service that doesn't respond with anything might not be a very relevant test
+- You will probably want to setup test data (e.g. in your database, CMS, etc) that models something similar to your customers
+
+---
+
+# Preparing a Test Environment
+## High level setup
+
+- In my situation it involved some CMS setup:
+  - Test organizations (manual)
+  - API keys (manual)
+  - Scripts to generate and insert data (semi manual)
+  - Take all the above  and add to configuration for use in testing
+  - A balance to be made between manual setup and automation
+<!--
+  Our tests were read heavy, so we didn't need to tear down the environment.
+    
+  If we did need to tear down then automation would have been **crucial**
+-->
+
+---
+
+# Preparing a Test Environment
+## Scenarios you want to test
+
+- Need to think about the scenarios you'd like to test
+  - Perhaps most taxing endpoint (complex JOINs? or computationally heavy?)
+  - Endpoints you anticipate being hit the hardest
+  - Read-only? What about writes?
+    - Writes complicate things further: ideally the tests will be idempotent, and data mutation means you may need to clean up data too (to avoid impacting subsequent tests)
+  - Do you know how much traffic you can expect? multiply it by 10 (early warning system!)
+
+TODO continue..
+
+TODO - section may be a bit too much..
+
+<!-- Perhaps a candidate for skipping over very quickly - could cover questions at the end / pub if needs be. -->
+
 - Data modeling: Can your endpoints respond very differently customer to customer? (e.g. they're storing their own differing data structures)
 - You need to find a suitable environment to test _against_: staging/pre-production usually makes most sense
     - It should be an environment setup identical to production. But customers aren't using it, so your load tests won't impact them.
 - But also a suitable machine to test _from_. If you're testing regularly (like in CI) you want something stable: not being used for other workloads, or otherwise able to introduce noise. A cloud hosted runner probably won't be ideal, but a self hosted runner or other dedicated machine in your control is best.
 
-FAQ: - Why reset the environment each time? if it slows down over time isn't that a good indication? (no: it's a side effect)
 
 ---
 
@@ -473,15 +507,15 @@ FAQ: What's good/bad? A: it depends on your own definition and SLA's defined.
 
 # Resources
 - https://grafana.com/docs/k6/latest/
-
+  - Lots of the code stolen directly from the K6 docs! So you can find most of it here.
 ---
 
 # Summary
 - Summarise key points
 - Reiterate who I am (also I'll be available in May!)
-- Can find the slides here: (short url & QR code)
+- Can find the slides here: adrian-thomas.com/presentations
 - Links to further reading
-  - Lots of the code stolen directly from the K6 docs! So you can find most of it there!
+  there!
 - Q&A
 
 

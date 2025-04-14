@@ -528,6 +528,10 @@ FAQ: What's good/bad? A: it depends on your own definition and SLA's defined.
 
 <!-- Context: Once our tests were running nightly in CI, and things were stable. One morning, we spotted a performance drop. Git bisecting the issue and re-running the load tests helped me identify the issue, which was also impacting a bunch of other services and teams across the organization. It was a minor OTEL update dependabot introduced! -->
 
-TODO - does this fit here?
+TODO - where does this fit?
+
 
 ---
+*Anecdote: Residual Sidecar Impacting Scaling*
+
+TODO - where does this fit?

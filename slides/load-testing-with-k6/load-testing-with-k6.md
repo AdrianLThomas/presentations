@@ -430,15 +430,13 @@ _In case of demo demons_
 
 *View fullscreen: Right Click > Open image in new tab*
 
-![cf dashboard width:600](./images/cloudflare-workers-dashboard.png)
+![cf dashboard width:300](./images/cloudflare-workers-dashboard.png)
 
-TODO - update screenshot with a fresh test run - maybe over 5 minutes?
-
-Note in particular:
+<!-- Note in particular:
 - P99
 - Requests Per Second
 - Errors
-- CPU time
+- CPU time -->
 
 ---
 
@@ -498,7 +496,7 @@ Note in particular:
  -->
 
 - A suitable environment to test **from** 
-  - ideally dedicated / not used for other workloads, e.g. self hosted runner
+  - ideally dedicated / not used for other workloads, e.g. self hosted runner or K6 cloud
 <!--  
   You don't want other people's workloads / noise impacting your tests.
 
@@ -524,7 +522,52 @@ Note in particular:
 ---
 
 # Example GHA Snippet
-TODO - put together a simple workflow and show the yaml
+<!-- View an example: https://github.com/AdrianLThomas/complexity-generator/actions/runs/14473130468/job/40592000591 
+
+
+See: 47 RPs - same as K6 output
+but..... p95 is different.
+-->
+
+<style scoped>
+marp-pre {
+  font-size: 0.7rem;
+}
+</style>
+
+```yaml
+name: k6 Load Test
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # every day at 00:00 UTC
+  workflow_dispatch: # trigger via UI on demand
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup K6
+        uses: grafana/setup-k6-action@v1
+
+      - name: Run K6 test
+        uses: grafana/run-k6-action@v1
+        with:
+          path: test/performance/basic.js
+```
+
+---
+
+_In case of demo demons_
+
+*View fullscreen: Right Click > Open image in new tab*
+
+![k6 gha output width:500](./images/k6-gha-output.png)
+
+---
 
 # CI - Example Output & Metrics
 <!-- (skip time depending) -->
@@ -563,6 +606,8 @@ FAQ: What's good/bad? A: it depends on your own definition and SLO's defined.
 - [grafana.com/docs/k6/latest](https://grafana.com/docs/k6/latest/)
 - [adrian-thomas.com/presentations](https://adrian-thomas.com/presentations)
 - [github.com/AdrianLThomas/complexity-generator](https://github.com/AdrianLThomas/complexity-generator)
+  - Basic API
+  - Also the GitHub Action for running K6
 
 # Any Questions?
 

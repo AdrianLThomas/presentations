@@ -419,10 +419,17 @@ If you spot issues, you'll likely want to check your service:
 
   Backup screenshot: `images/cloudflare-workers-dashboard.png` 
 
-
   Demonstrate:
   - Threshold is 95% of checks should pass, as service only errors 1% only of the time.
  -->
+
+---
+
+_In case of demo demons_
+
+*View fullscreen: Right Click > Open image in new tab*
+
+![cf dashboard width:600](./images/cloudflare-workers-dashboard.png)
 
 ---
 
@@ -442,7 +449,7 @@ If you spot issues, you'll likely want to check your service:
   - Test organizations (manual)
   - API keys (manual)
   - Scripts to generate and insert data (semi manual)
-  - Take all the above  and add to configuration for use in testing
+  - Take all the above and add to a configuration file, for reusability in testing
   - A balance to be made between manual setup and automation
 <!--
   Our tests were read heavy, so we didn't need to tear down the environment.
@@ -453,26 +460,40 @@ If you spot issues, you'll likely want to check your service:
 ---
 
 # Preparing a Test Environment
-## Scenarios you want to test
+## Scenarios to Test
 
 - Need to think about the scenarios you'd like to test
   - Perhaps most taxing endpoint (complex JOINs? or computationally heavy?)
   - Endpoints you anticipate being hit the hardest
   - Read-only? What about writes?
     - Writes complicate things further: ideally the tests will be idempotent, and data mutation means you may need to clean up data too (to avoid impacting subsequent tests)
-  - Do you know how much traffic you can expect? multiply it by 10 (early warning system!)
+  - Do you know how much traffic you are expecting? multiply it by 10 (early warning system!)
 
-TODO continue..
+---
 
-TODO - section may be a bit too much..
+# Preparing a Test Environment
+## Data Setup
 
-<!-- Perhaps a candidate for skipping over very quickly - could cover questions at the end / pub if needs be. -->
+- If customers can store data with you, you'll probably want to preload it before testing
 
-- Data modeling: Can your endpoints respond very differently customer to customer? (e.g. they're storing their own differing data structures)
-- You need to find a suitable environment to test _against_: staging/pre-production usually makes most sense
-    - It should be an environment setup identical to production. But customers aren't using it, so your load tests won't impact them.
-- But also a suitable machine to test _from_. If you're testing regularly (like in CI) you want something stable: not being used for other workloads, or otherwise able to introduce noise. A cloud hosted runner probably won't be ideal, but a self hosted runner or other dedicated machine in your control is best.
+---
 
+# Preparing a Test Environment
+## The Infrastructure
+
+- A suitable environment to test **against** 
+  - ideally identical to production, but **not** production, e.g. staging
+<!-- 
+  So customers aren't using it and you're not impacting their experience.
+ -->
+
+- A suitable environment to test **from** 
+  - ideally dedicated / not used for other workloads, e.g. self hosted runner
+<!--  
+  You don't want other people's workloads / noise impacting your tests.
+
+  - Bad example: Cloud hosted runner - as it could be running anything, you're at their mercy.
+-->
 
 ---
 
@@ -541,3 +562,16 @@ TODO - where does this fit?
 *Anecdote: Residual Sidecar Impacting Scaling*
 
 TODO - where does this fit?
+
+
+---
+
+TODO
+- Content
+  - Anything missed?
+  - AI sanity check / critique
+- Timings
+  - Trial run: does it all fit?
+  - Mark candidates for skipping if time required
+- Styling
+  - Improvements / Marp theme?

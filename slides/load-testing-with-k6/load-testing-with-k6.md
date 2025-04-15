@@ -507,22 +507,28 @@ Note in particular:
 
 ---
 
-# CI- Getting Set Up
-- Depending on the complexity of your tests, you might not want to run _all_ of them regularly (e.g. hours of execution)
-- Sanity checking the health of your endpoints for 10 minutes or so should give you a good indication
+# Running the Tests Regularly
+
+- You'll probably want to run the tests regularly in CI
+  - Enables you to test for regressions
+  - At least once a day (e.g. nightly cron)
+  - Execute for a reasonable duration
+
+- Don't test on every push - it's too heavy
+- But don't test too irregularly that the results end up ignored
+
+<!-- 
+  Depending on the complexity of your tests, you might not want to run _all_ of them regularly (e.g. hours of execution)
+-->
 
 ---
 
-# CI - Test Frequency
-- Ideally every night (cron / nightly pipeline)
-- You might decide to do it more regularly: but caution should be applied.. you may disrupt your colleagues (if a shared environment) / or it may be expensive!
-
-TODO show example GHA snippet
-
----
+# Example GHA Snippet
+TODO - put together a simple workflow and show the yaml
 
 # CI - Example Output & Metrics
 <!-- (skip time depending) -->
+- TODO
 - Maybe show the output in GHA
 - Failing build the build - and alerting 
     - Caveat: P95 between K6 output and external metrics may be different (but should be similar)

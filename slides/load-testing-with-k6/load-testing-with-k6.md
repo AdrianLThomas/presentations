@@ -331,8 +331,8 @@ export function teardown(data) {
 
 ## Checks
 
-- Boolean condition, e.g. status should be 200
-- Body should include a string
+- Boolean condition, e.g. status should be 200 or body should include a string
+- Just a metric to report
 
 ```javascript
 import { check } from 'k6';
@@ -349,7 +349,7 @@ export default function () {
 
 **A failing check does NOT equate to a failing test.**
 
-<!-- TODO clarify: if it doesn't fail then what's the point? -->
+<!-- If you want a check to fail, it must be combined with a ..... threshold (next slide) -->
 
 ---
 
@@ -376,6 +376,8 @@ export default function () {
 ```
 
 **A failing threshold DOES equate to a failing test**. It will return a non-zero exit code.
+
+<!-- You can also combine custom checks with thresholds. -->
 
 ---
 

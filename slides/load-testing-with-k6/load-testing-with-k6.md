@@ -411,6 +411,7 @@ If you spot issues, you'll likely want to check your service:
 ---
 
 # Live Walkthrough and Demo
+<!-- TODO - does it actually make sense to demo so early? maybe it should later in the pres? -->
 
 <!-- 
   Show some code of a simple service and API test
@@ -483,6 +484,7 @@ Note in particular:
 ## Data Setup
 
 - If customers can store data with you, you'll probably want to preload it before testing
+- e.g. may involve setting up some scripts to insert test data
 
 ---
 
@@ -505,11 +507,13 @@ Note in particular:
 
 ---
 
-# Getting Set Up in CI
+# CI- Getting Set Up
 - Depending on the complexity of your tests, you might not want to run _all_ of them regularly (e.g. hours of execution)
 - Sanity checking the health of your endpoints for 10 minutes or so should give you a good indication
 
-# CI Frequency
+---
+
+# CI - Test Frequency
 - Ideally every night (cron / nightly pipeline)
 - You might decide to do it more regularly: but caution should be applied.. you may disrupt your colleagues (if a shared environment) / or it may be expensive!
 
@@ -517,33 +521,36 @@ TODO show example GHA snippet
 
 ---
 
-# Example Output & Metrics
+# CI - Example Output & Metrics
 <!-- (skip time depending) -->
 - Maybe show the output in GHA
 - Failing build the build - and alerting 
     - Caveat: P95 between K6 output and external metrics may be different (but should be similar)
 - Show a nice P95/P99 graph? maybe Cloudflare gives us something out of the box?
 
-FAQ: What's good/bad? A: it depends on your own definition and SLA's defined.
+FAQ: What's good/bad? A: it depends on your own definition and SLO's defined.
 
 ---
 
 # Gotchas
-<!-- (to look out for) -->
-- Load tests running against a CDN
-- Warm up time (to scale) in tests
-- Response times reported by K6 may be slightly different to those reported by your monitoring system.
+- Load testing against a CDN (...do you need to?)
+<!-- might get blocked, also you're testing the CDN not your origin -->
+- Allow for warm up time (if scaling) in tests
+- K6 may report different response metrics to your observability platform
+  - _due to client vs server reporting_
+
+<!-- ---
 
 # Best Practices / Advanced (skip time depending)
 - Write tests scripts to be reusable: make use of env vars (so you can run them locally or in other environments)
 - Try to simulate existing traffic patterns - e.g. if distribute the load between endpoints that are hit frequently and less frequently in production with real traffic.
-    - FAQ: you can do this by looking at your existing observability data.
+    - FAQ: you can do this by looking at your existing observability data. -->
 
 --- 
 
-# FIN
+# FIN!
 ## Summary
-- TODO: Summarise key points
+- TODO: Summarise key points - what you've learnt
 
 
 ## Resources

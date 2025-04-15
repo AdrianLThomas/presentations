@@ -39,7 +39,7 @@ img {
 }
 </style>
 
-# Load Testing with K6
+# Load Testing With K6
 
 ### Adrian L Thomas, MEng
 
@@ -62,7 +62,7 @@ Disclaimer: I am not representing any company. This talk is based on my own pers
 
 ---
 
-# What you will learn
+# What You Will Learn
 
 - What performance testing is
 - Why performance test
@@ -72,7 +72,7 @@ Disclaimer: I am not representing any company. This talk is based on my own pers
 
 ---
 
-# You won't learn
+# You Won't Learn
 
 - K6 Browser
 - Grafana Cloud
@@ -83,7 +83,7 @@ Disclaimer: I am not representing any company. This talk is based on my own pers
 
 ---
 
-# Who is this talk for?
+# Who Is This Talk For?
 
 Mainly focused towards engineers and leaders.
 
@@ -91,7 +91,7 @@ e.g. those who may be launching a new service soon, or, wish to retrospectively 
 
 ---
 
-# What is a Load Test?
+# What Is a Load Test?
 
 - It's literally a test that puts network load on your system
 - Usually simulating traffic beyond that you are expecting to receive, and observe whether the system will cope
@@ -143,7 +143,7 @@ p {
 
 ---
 
-# This talk
+# This Talk
 
 - I'll be talking about K6 (https://k6.io)
 - It's a free, and open source load testing tool (by Grafana Labs)
@@ -219,7 +219,7 @@ K6 can do so much, but it doesn't need to be complicated.
 
 ---
 
-# Quickstart: Running a test
+# Quickstart: Running a Test
 
 ```sh
 k6 run script.js
@@ -474,7 +474,7 @@ TODO - section may be a bit too much..
 
 ---
 
-# Getting set up in CI
+# Getting Set Up in CI
 - Depending on the complexity of your tests, you might not want to run _all_ of them regularly (e.g. hours of execution)
 - Sanity checking the health of your endpoints for 10 minutes or so should give you a good indication
 
@@ -486,7 +486,8 @@ TODO show example GHA snippet
 
 ---
 
-# Example Output & Metrics (skip time depending)
+# Example Output & Metrics
+<!-- (skip time depending) -->
 - Maybe show the output in GHA
 - Metrics out: P95, requests per second, errors,and deeper metrics (memory, cpu, network throughput, etc)
 - Failing build the build - and alerting 
@@ -497,7 +498,8 @@ FAQ: What's good/bad? A: it depends on your own definition and SLA's defined.
 
 ---
 
-# Gotchas (to look out for)
+# Gotchas
+<!-- (to look out for) -->
 - Load tests running against a CDN
 - Warm up time (to scale) in tests
 - Response times reported by K6 may be slightly different to those reported by your monitoring system.

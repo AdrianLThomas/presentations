@@ -431,6 +431,14 @@ _In case of demo demons_
 
 ![cf dashboard width:600](./images/cloudflare-workers-dashboard.png)
 
+TODO - update screenshot with a fresh test run - maybe over 5 minutes?
+
+Note in particular:
+- P99
+- Requests Per Second
+- Errors
+- CPU time
+
 ---
 
 # Preparing a Test Environment
@@ -512,7 +520,6 @@ TODO show example GHA snippet
 # Example Output & Metrics
 <!-- (skip time depending) -->
 - Maybe show the output in GHA
-- Metrics out: P95, requests per second, errors,and deeper metrics (memory, cpu, network throughput, etc)
 - Failing build the build - and alerting 
     - Caveat: P95 between K6 output and external metrics may be different (but should be similar)
 - Show a nice P95/P99 graph? maybe Cloudflare gives us something out of the box?
@@ -534,20 +541,17 @@ FAQ: What's good/bad? A: it depends on your own definition and SLA's defined.
 
 --- 
 
-# Resources
-- https://grafana.com/docs/k6/latest/
-  - Lots of the code stolen directly from the K6 docs! So you can find most of it here.
----
-
-# Summary
-- Summarise key points
-- Reiterate who I am (also I'll be available in May!)
-- Can find the slides here: adrian-thomas.com/presentations
-- Links to further reading
-  there!
-- Q&A
+# FIN
+## Summary
+- TODO: Summarise key points
 
 
+## Resources
+- [grafana.com/docs/k6/latest](https://grafana.com/docs/k6/latest/)
+- [adrian-thomas.com/presentations](https://adrian-thomas.com/presentations)
+- [github.com/AdrianLThomas/complexity-generator](https://github.com/AdrianLThomas/complexity-generator)
+
+# Any Questions?
 
 ---
 

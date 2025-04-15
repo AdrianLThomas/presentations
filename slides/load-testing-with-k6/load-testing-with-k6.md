@@ -410,7 +410,7 @@ If you spot issues, you'll likely want to check your service:
 
 ---
 
-# Live Walkthrough and Demo
+# Live Demo: Running K6, CLI Output & Cloudflare
 <!-- TODO - does it actually make sense to demo so early? maybe it should later in the pres? -->
 
 <!-- 
@@ -561,6 +561,10 @@ jobs:
 
 ---
 
+# Live Demo: Running in GHA
+
+---
+
 _In case of demo demons_
 
 *View fullscreen: Right Click > Open image in new tab*
@@ -569,19 +573,7 @@ _In case of demo demons_
 
 ---
 
-# CI - Example Output & Metrics
-<!-- (skip time depending) -->
-- TODO
-- Maybe show the output in GHA
-- Failing build the build - and alerting 
-    - Caveat: P95 between K6 output and external metrics may be different (but should be similar)
-- Show a nice P95/P99 graph? maybe Cloudflare gives us something out of the box?
-
-FAQ: What's good/bad? A: it depends on your own definition and SLO's defined.
-
----
-
-# Gotchas
+# Finishing up... some gotchas
 - Load testing against a CDN (...do you need to?)
 <!-- might get blocked, also you're testing the CDN not your origin -->
 - Allow for warm up time (if scaling) in tests
@@ -589,6 +581,8 @@ FAQ: What's good/bad? A: it depends on your own definition and SLO's defined.
   - _due to client vs server reporting_
 
 <!-- ---
+
+Slide 8 for load test types
 
 # Best Practices / Advanced (skip time depending)
 - Write tests scripts to be reusable: make use of env vars (so you can run them locally or in other environments)
@@ -598,16 +592,19 @@ FAQ: What's good/bad? A: it depends on your own definition and SLO's defined.
 --- 
 
 # FIN!
-## Summary
-- TODO: Summarise key points - what you've learnt
+## Key Learnings
+- Understanding and the importance of load testing
+- Introduction to K6
+- Some practical guidance
 
 
 ## Resources
 - [grafana.com/docs/k6/latest](https://grafana.com/docs/k6/latest/)
 - [adrian-thomas.com/presentations](https://adrian-thomas.com/presentations)
 - [github.com/AdrianLThomas/complexity-generator](https://github.com/AdrianLThomas/complexity-generator)
-  - Basic API
-  - Also the GitHub Action for running K6
+  <!-- 
+    Repo contains: Basic API, Also the GitHub Action for running K6
+  -->
 
 # Any Questions?
 

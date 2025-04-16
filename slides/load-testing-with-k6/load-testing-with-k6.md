@@ -40,6 +40,7 @@ img {
 
 - Software Engineer ~13 years professional experience
 - Had a few roles: SWE, Team Lead, Staff Engineer...
+- Most recently working at Contentful for 2.5 years, and DAZN for 4 years before that
 - Worked across a bunch of technologies (too many to list!)
 - Talk to me in the pub about: cars, running, pizza, or any of the above..
 

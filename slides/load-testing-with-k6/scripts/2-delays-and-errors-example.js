@@ -10,8 +10,7 @@ export const options = {
 };
 
 export default function () {
-  http.get('https://complexity-api.adrian-thomas.com?complexity=20&error-rate=0.01'); // errors 1% of the time
-//   http.get('http://localhost:8787/?complexity=1&error-rate=0.005'); 
+  http.get('http://localhost:8787/?complexity=1&error-rate=0.01'); // errors 1% of the time
 
   sleep(0.1);
 }

@@ -13,17 +13,6 @@ style: |
         color: inherit;
         cursor: auto;
     }
----
-
-
-
-# DRAFT
-
-These slides are **IN PROGRESS**. If you're reading this, they probably don't quite make sense yet as I've not finished!
-
-Continue at your own risk...
-
-
 
 ---
 
@@ -67,8 +56,11 @@ Disclaimer: I am not representing any company. This talk is based on my own pers
 - What performance testing is
 - Why performance test
 - K6: What it is, what you can do with it, getting up and running...
+  - Free, and open source load testing tool (by Grafana Labs)
 - Some anecdotes
-- Gotchas & best practices
+- Some gotchas
+
+_Time for questions at the end - or grab me in the pub after_
 
 ---
 
@@ -85,7 +77,7 @@ Disclaimer: I am not representing any company. This talk is based on my own pers
 
 # Who Is This Talk For?
 
-Mainly focused towards engineers and leaders.
+Mainly focused towards engineers and engineering leaders.
 
 e.g. those who may be launching a new service soon, or, wish to retrospectively load test their service (before your users do it for you!).
 
@@ -94,7 +86,8 @@ e.g. those who may be launching a new service soon, or, wish to retrospectively 
 # What Is a Load Test?
 
 - It's literally a test that puts network load on your system
-- Usually simulating traffic beyond that you are expecting to receive, and observe whether the system will cope
+- Like any other test (e.g. a unit test), you define your expectations and assert whether the result is acceptable
+- There's a few different types of load test...
 
 ---
 
@@ -132,26 +125,23 @@ p {
 *Anecdote: Pre go-live (CPU Throttling)*
 
 <!-- 
-  Before I start digging in to the code:  I want to give a little anecdote.
 
-  I worked on a team with a service that was operating normally under our manual and automated testing (integration tests) on staging. 
+1. Worked on a team that owned a service that was operating as expected
 
-  When we introduced the load test, almost immediately we unravelled a throttling issue. After some inspection we noticed that the K8S configuration that plagued not only our service but other services too, meant even though the K8S cluster had CPU capacity to handle the additional load, AND our service scaled out, our service would still be throttled and perform poorly. 
+2. 1st basic load test: unravelled a throttling issue
 
-  So even just getting started was worthwhile! and I'll be mention some of the other benefits discovered as we get more involved.
+3. Scaling out was fine, requests were responding slowly
+
+4. Investigated: spotted bad K8S config
+
+5. Was common config across the organization, impacted most other services in the org too
+
+6. K8S cluster had capacity to support this burst performance, but due to the CPU limits in place, it was throttled.
+
+7. 1-2 line YAML change: significant performance improvement
+
+Just getting started already delivered value.
 -->
-
----
-
-# This Talk
-
-- I'll be talking about K6 (https://k6.io)
-- It's a free, and open source load testing tool (by Grafana Labs)
-- There are other tools out there
-
-_Time for questions at the end - or grab me in the pub after_
-
-<!-- I'll be talking about the free, open source product, not the cloud offering -->
 
 ---
 
@@ -179,8 +169,6 @@ snap install k6 # ubuntu
 
 # Quickstart: What Does a Simple Test Script Look Like?
 
-<!-- Consider: Skipping the next slides in favour of a live demo. -->
-
 ```javascript
 import http from 'k6/http';
 import { sleep } from 'k6';
@@ -201,20 +189,19 @@ Any guesses for how long this test takes to execute?
 *Source: https://grafana.com/docs/k6/latest/get-started/write-your-first-test/*
 
 <!-- 
-
-Explain each line (imports, iterations, how the func gets called)
+Review: each line
 
 Note: no "await" on the get!
 
 No VUs configured, so just one user.
 
-Function is called 10 times, but sleeps 1 second each time. So the total test time is ~10 seconds.
+Function called 10 times, sleeps 1 second each time. 
+
+Total test time is ~10 seconds.
 
 If we had 10 VUs then it would spend those 10 iterations sooner (so execution would be ~1s)
 
-K6 can do so much, but it doesn't need to be complicated.
-
-
+K6 can do a lot, but it doesn't need to be complicated.
 -->
 
 ---
@@ -270,13 +257,11 @@ running (00m11.4s), 0/1 VUs, 10 complete and 0 interrupted iterations
 ```
 
 <!-- 
-Note: A few things going on. 
-
-Notable: 
+Note:
     http_req_dur
     http_req_failed
 
-    runtime at bottom
+    execution time (bottom)
  -->
 
 ---
@@ -349,7 +334,7 @@ export default function () {
 
 **A failing check does NOT equate to a failing test.**
 
-<!-- If you want a check to fail, it must be combined with a ..... threshold (next slide) -->
+<!-- If you want a CHECK to fail, it must be combined with a THRESHOLD -->
 
 ---
 
@@ -357,8 +342,11 @@ export default function () {
 
 ## Thresholds
 
-<!-- - Typically SLO's you'd like to report on, e.g. <1% of requests should error
-- or 95% of requests should be below 200ms -->
+<!-- 
+
+SLO's you'd like to report on
+
+-->
 
 ```javascript
 import http from 'k6/http';
@@ -377,7 +365,11 @@ export default function () {
 
 **A failing threshold DOES equate to a failing test**. It will return a non-zero exit code.
 
-<!-- You can also combine custom checks with thresholds. -->
+<!-- Exit code is helpful particularly in CI to fail the build -->
+
+<!-- Can combine checks with thresholds. -->
+
+<!-- TODO - show example in code of threshold / check -->
 
 ---
 
@@ -406,62 +398,42 @@ If you spot issues, you'll likely want to check your service:
 - DB load
 - etc
 
-<!-- It's important to have visibility of that too -->
-
 ---
 
-# Live Demo: Running K6, CLI Output & Cloudflare
-<!-- TODO - does it actually make sense to demo so early? maybe it should later in the pres? -->
+# Live Demo: Running K6 Locally
 
 <!-- 
-  Show some code of a simple service and API test
+Show K6 script and execute it - view CLI output.
 
-  Take a look at some graphs in Cloudflare
-
-  Backup screenshot: `images/cloudflare-workers-dashboard.png` 
-
-  Demonstrate:
-  - Threshold is 95% of checks should pass, as service only errors 1% only of the time.
+Show: Threshold is 95% of checks should pass, as service only errors 1% only of the time.
  -->
-
----
-
-_In case of demo demons_
-
-*View fullscreen: Right Click > Open image in new tab*
-
-![cf dashboard width:300](./images/cloudflare-workers-dashboard.png)
-
-<!-- Note in particular:
-- P99
-- Requests Per Second
-- Errors
-- CPU time -->
 
 ---
 
 # Preparing a Test Environment
 
-- This could be the most time consuming part of getting setup, depending on what you're testing
-- As you've seen, the test scripts themselves can be quite simple
-- Hitting a service that doesn't respond with anything might not be a very relevant test
-- You will probably want to setup test data (e.g. in your database, CMS, etc) that models something similar to your customers
+- Might be the most time consuming part of setup
+- Test scripts themselves can be simple
+- You will probably need to setup test data (e.g. in your database, CMS, etc) to simulate typical responses of your customers
 
 ---
 
 # Preparing a Test Environment
 ## High level setup
 
-- In my situation it involved some CMS setup:
-  - Test organizations (manual)
-  - API keys (manual)
-  - Scripts to generate and insert data (semi manual)
-  - Take all the above and add to a configuration file, for reusability in testing
-  - A balance to be made between manual setup and automation
+- For example, you may need to setup things like:
+  - Test accounts
+  - API keys
+  - Scripts to generate and insert test data
+  - _This may be manual or automated depending on the maturity of the org_
+
+- Add to config file (not secrets) and load from tests
+
 <!--
-  Our tests were read heavy, so we didn't need to tear down the environment.
-    
-  If we did need to tear down then automation would have been **crucial**
+If setting up a few test accounts manually is 30 minutes
+
+Do that... it might be much quicker than automating it all!
+
 -->
 
 ---
@@ -561,7 +533,7 @@ jobs:
 
 ---
 
-# Live Demo: Running in GHA
+# Live Demo: Running in CI & Observing The Results
 
 ---
 
@@ -570,6 +542,14 @@ _In case of demo demons_
 *View fullscreen: Right Click > Open image in new tab*
 
 ![k6 gha output width:500](./images/k6-gha-output.png)
+
+![cf dashboard width:300](./images/cloudflare-workers-dashboard.png)
+
+<!-- Note in particular:
+- P99
+- Requests Per Second
+- Errors
+- CPU time -->
 
 ---
 
@@ -629,6 +609,7 @@ TODO
 - Content
   - Anything missed?
   - AI sanity check / critique
+  - Check final TODOs
 - Timings
   - Trial run: does it all fit?
   - Mark candidates for skipping if time required

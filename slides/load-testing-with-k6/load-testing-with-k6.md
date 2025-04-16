@@ -569,7 +569,7 @@ _In case of demo demons_
 
 *View fullscreen: Right Click > Open image in new tab*
 
-![k6 gha output width:500](./images/k6-gha-output.png)
+![k6 gha output width:300](./images/k6-gha-output.png)
 
 ![cf dashboard width:300](./images/cloudflare-workers-dashboard.png)
 

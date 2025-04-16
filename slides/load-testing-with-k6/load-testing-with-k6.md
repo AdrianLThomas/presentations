@@ -439,22 +439,44 @@ Do that... it might be much quicker than automating it all!
 ---
 
 # Preparing a Test Environment
-## Scenarios to Test
+## Test Scenarios - What to Test?
 
-- Need to think about the scenarios you'd like to test
-  - Perhaps most taxing endpoint (complex JOINs? or computationally heavy?)
-  - Endpoints you anticipate being hit the hardest
-  - Read-only? What about writes?
-    - Writes complicate things further: ideally the tests will be idempotent, and data mutation means you may need to clean up data too (to avoid impacting subsequent tests)
-  - Do you know how much traffic you are expecting? multiply it by 10 (early warning system!)
+What do you want to test?
+- Frequently hit endpoints?
+- Complex endpoints?
+- Read-only?
+  - If writing, probably additional work to clean up data too
+- _Gotcha_: Caution, load testing against a CDN...
+
+<!-- 
+Complex: computationally heavy, complex DB queries?
+
+
+Do you really want to test the CDN? what's the point? youy might get blocked, and you're not testing your origin properly
+
+-->
+
+---
+
+# Preparing a Test Environment
+## Test Scenarios - How to Test?
+
+How do you want to simulate it?
+- Aforementioned load test types
+- e.g. for stress test: maybe try 10x the traffic you anticipate
+
+<!-- 
+
+Writing: clean up to avoid impacting subsequent test runs
+ -->
 
 ---
 
 # Preparing a Test Environment
 ## Data Setup
 
-- If customers can store data with you, you'll probably want to preload it before testing
-- e.g. may involve setting up some scripts to insert test data
+- If storing customer data, you'll probably want to preload test data
+- e.g. writing some scripts to insert test data
 
 ---
 
@@ -483,12 +505,18 @@ Do that... it might be much quicker than automating it all!
   - Enables you to test for regressions
   - At least once a day (e.g. nightly cron)
   - Execute for a reasonable duration
+  - *Gotcha*: Allow time for warm up!
 
-- Don't test on every push - it's too heavy
+- Don't stress test everything on every push - it's too heavy
+  - _But: K6 can be used for lightweight smoke tests too_
 - But don't test too irregularly that the results end up ignored
 
 <!-- 
-  Depending on the complexity of your tests, you might not want to run _all_ of them regularly (e.g. hours of execution)
+  Long execution time = heavy on the environment, and if it was every push you'd be waiting forever for your build to complete.
+
+  You can use stages for warm up. If you don't warm up you might not scale quick enough!
+  Obviously depends on the customer traffic patterns.
+  TODO - provide an example if time.
 -->
 
 ---
@@ -535,6 +563,14 @@ jobs:
 
 # Live Demo: Running in CI & Observing The Results
 
+<!-- 
+Show K6 output in GHA
+Show Cloudflare output
+
+Gotcha: K6 vs Cloudflare reporting of response times (client vs server reporting)
+
+ -->
+
 ---
 
 _In case of demo demons_
@@ -553,29 +589,11 @@ _In case of demo demons_
 
 ---
 
-# Finishing up... some gotchas
-- Load testing against a CDN (...do you need to?)
-<!-- might get blocked, also you're testing the CDN not your origin -->
-- Allow for warm up time (if scaling) in tests
-- K6 may report different response metrics to your observability platform
-  - _due to client vs server reporting_
-
-<!-- ---
-
-Slide 8 for load test types
-
-# Best Practices / Advanced (skip time depending)
-- Write tests scripts to be reusable: make use of env vars (so you can run them locally or in other environments)
-- Try to simulate existing traffic patterns - e.g. if distribute the load between endpoints that are hit frequently and less frequently in production with real traffic.
-    - FAQ: you can do this by looking at your existing observability data. -->
-
---- 
-
 # FIN!
-## Key Learnings
-- Understanding and the importance of load testing
-- Introduction to K6
-- Some practical guidance
+## Summary
+- Importance of load testing, what it can do for you
+- Crash course in K6
+- Some practical guidance and anecdotes
 
 
 ## Resources
@@ -585,8 +603,6 @@ Slide 8 for load test types
   <!-- 
     Repo contains: Basic API, Also the GitHub Action for running K6
   -->
-
-# Any Questions?
 
 ---
 
@@ -602,16 +618,21 @@ TODO - where does this fit?
 
 TODO - where does this fit?
 
-
 ---
+
+<!-- 
+ENHANCEMENTS
 
 TODO
 - Content
   - Anything missed?
   - AI sanity check / critique
   - Check final TODOs
+  - Look at config in GHA again if time.
 - Timings
   - Trial run: does it all fit?
   - Mark candidates for skipping if time required
 - Styling
   - Improvements / Marp theme?
+
+ -->

@@ -610,9 +610,12 @@ In turn we also noticed it was impacting a bunch of other services and teams acr
 - [grafana.com/docs/k6/latest](https://grafana.com/docs/k6/latest/)
 - [adrian-thomas.com/presentations](https://adrian-thomas.com/presentations)
 - [github.com/AdrianLThomas/complexity-generator](https://github.com/AdrianLThomas/complexity-generator)
-  <!-- 
-    Repo contains: Basic API, Also the GitHub Action for running K6
-  -->
+  
+<!-- 
+Repo contains: Basic API, Also the GitHub Action for running K6
+
+Any questions?
+-->
 
 ---
 

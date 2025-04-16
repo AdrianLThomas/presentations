@@ -414,7 +414,7 @@ Show: Threshold is 95% of checks should pass, as service only errors 1% only of 
 
 - Might be the most time consuming part of setup
 - Test scripts themselves can be simple
-- You will probably need to setup test data (e.g. in your database, CMS, etc) to simulate typical responses of your customers
+- You will probably need to set up test data (e.g. in your database, CMS, etc) to simulate typical responses of your customers
 
 ---
 
@@ -624,8 +624,6 @@ ENHANCEMENTS
 
 TODO
 - Content
-  - Anything missed?
-  - AI sanity check / critique
   - Check final TODOs
   - Look at config in GHA again if time.
 - Timings

@@ -16,9 +16,7 @@ style: |
 
 ---
 
-<!-- 
-    footer: hello@adrian-thomas.com
--->
+<!-- footer: hello@adrian-thomas.com -->
 
 <style scoped>
 img {
@@ -57,8 +55,7 @@ Disclaimer: I am not representing any company. This talk is based on my own pers
 - Why performance test
 - K6: What it is, what you can do with it, getting up and running...
   - Free, and open source load testing tool (by Grafana Labs)
-- Some anecdotes
-- Some gotchas
+- Some anecdotes & gotchas
 
 _Time for questions at the end - or grab me in the pub after_
 
@@ -367,9 +364,7 @@ export default function () {
 
 <!-- Exit code is helpful particularly in CI to fail the build -->
 
-<!-- Can combine checks with thresholds. -->
-
-<!-- TODO - show example in code of threshold / check -->
+<!-- Can combine checks with thresholds: examples in the documentation -->
 
 ---
 
@@ -494,7 +489,9 @@ Writing: clean up to avoid impacting subsequent test runs
 <!--  
   You don't want other people's workloads / noise impacting your tests.
 
-  - Bad example: Cloud hosted runner - as it could be running anything, you're at their mercy.
+  - Bad example: Cloud hosted runner
+    - as it could be running anything for other users, you're at their mercy
+    - it might be running in different regions each time
 -->
 
 ---
@@ -516,7 +513,8 @@ Writing: clean up to avoid impacting subsequent test runs
 
   You can use stages for warm up. If you don't warm up you might not scale quick enough!
   Obviously depends on the customer traffic patterns.
-  TODO - provide an example if time.
+  
+  Warm up example in my final live demo
 -->
 
 ---
@@ -564,6 +562,16 @@ jobs:
 # Live Demo: Running in CI & Observing The Results
 
 <!-- 
+FIRST: Kick off workflow
+
+Show:
+  - Workflow
+  - API Code?
+  - Test Code
+Go over the code, warm up, configuration..
+
+<<<5 min wait>>> - jump to anecdote whilst running?
+
 Show K6 output in GHA
 Show Cloudflare output
 
@@ -620,16 +628,12 @@ Any questions?
 ---
 
 <!-- 
-ENHANCEMENTS
-
 TODO
-- Content
-  - Check final TODOs
-  - Look at config in GHA again if time.
+
 - Timings
   - Trial run: does it all fit?
   - Mark candidates for skipping if time required
-- Styling
-  - Improvements / Marp theme?
+- Content
+  - Look at config in GHA again if time.
 
  -->

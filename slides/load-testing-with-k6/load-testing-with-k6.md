@@ -113,9 +113,9 @@ p {
 # Load Testing Use Cases
 
 - Whatever the reason, it helps you understand:
-    - how far your current implementation will take you
-    - where the system bends
-    - what your scaling challenges may be
+    - How far your current implementation will take you
+    - Where the system bends
+    - What your scaling challenges may be
 
 ---
 

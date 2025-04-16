@@ -38,8 +38,8 @@ img {
 
 # Who?
 
-- Generalist Software Engineer ~13 years professional experience
-- Had a bunch of roles: SWE, Team Lead, Staff Engineer...
+- Software Engineer ~13 years professional experience
+- Had a few roles: SWE, Team Lead, Staff Engineer...
 - Worked across a bunch of technologies (too many to list!)
 - Talk to me in the pub about: cars, running, pizza, or any of the above..
 
@@ -51,8 +51,8 @@ Disclaimer: I am not representing any company. This talk is based on my own pers
 
 # What You Will Learn
 
-- What performance testing is
-- Why performance test
+- What load testing is
+- Why load test
 - K6: What it is, what you can do with it, getting up and running...
   - Free, and open source load testing tool (by Grafana Labs)
 - Some anecdotes & gotchas
@@ -76,7 +76,7 @@ _Time for questions at the end - or grab me in the pub after_
 
 Mainly focused towards engineers and engineering leaders.
 
-e.g. those who may be launching a new service soon, or, wish to retrospectively load test their service (before your users do it for you!).
+I'll be talking about code and implementation details.
 
 ---
 
@@ -154,16 +154,6 @@ Just getting started already delivered value.
 
 ---
 
-# Quickstart: Installing
-
-```sh
-brew install k6 # macos
-choco install k6 # windows
-snap install k6 # ubuntu
-```
-
----
-
 # Quickstart: What Does a Simple Test Script Look Like?
 
 ```javascript
@@ -180,8 +170,6 @@ export default function () {
   sleep(1);
 }
 ```
-
-Any guesses for how long this test takes to execute?
 
 *Source: https://grafana.com/docs/k6/latest/get-started/write-your-first-test/*
 
@@ -200,6 +188,16 @@ If we had 10 VUs then it would spend those 10 iterations sooner (so execution wo
 
 K6 can do a lot, but it doesn't need to be complicated.
 -->
+
+---
+
+# Quickstart: Installing
+
+```sh
+brew install k6 # macos
+choco install k6 # windows
+snap install k6 # ubuntu
+```
 
 ---
 
@@ -287,7 +285,7 @@ export default function () {
 }
 ```
 
----
+<!-- ---
 
 # Core Concepts - Test Lifecycle
 
@@ -305,7 +303,7 @@ export default function (data) {
 export function teardown(data) {
   // 4. teardown code, OPTIONAL, e.g. clean up data
 }
-```
+``` -->
 
 ---
 
@@ -382,11 +380,11 @@ export default function () {
 
 # Metrics to Investigate
 
-If there's an issue, you'll probably want to keep an eye on:
+During the test runs, keep an eye on:
 - P95 response duration
 - Error rate
 
-If you spot issues, you'll likely want to check your service:
+If you spot an issue, you'll likely want to check your service:
 - Is scaling (up / out)
 - CPU utilization
 - RAM utilization
@@ -409,7 +407,7 @@ Show: Threshold is 95% of checks should pass, as service only errors 1% only of 
 
 - Might be the most time consuming part of setup
 - Test scripts themselves can be simple
-- You will probably need to set up test data (e.g. in your database, CMS, etc) to simulate typical responses of your customers
+- You will probably need to set up test data (e.g. in your database, CMS, etc) to simulate typical responses of your endpoints (times, payload size, etc)
 
 ---
 
@@ -419,7 +417,7 @@ Show: Threshold is 95% of checks should pass, as service only errors 1% only of 
 - For example, you may need to setup things like:
   - Test accounts
   - API keys
-  - Scripts to generate and insert test data
+  - Scripts to generate and preload test data
   - _This may be manual or automated depending on the maturity of the org_
 
 - Add to config file (not secrets) and load from tests
@@ -468,14 +466,6 @@ Writing: clean up to avoid impacting subsequent test runs
 ---
 
 # Preparing a Test Environment
-## Data Setup
-
-- If storing customer data, you'll probably want to preload test data
-- e.g. writing some scripts to insert test data
-
----
-
-# Preparing a Test Environment
 ## The Infrastructure
 
 - A suitable environment to test **against** 
@@ -504,9 +494,9 @@ Writing: clean up to avoid impacting subsequent test runs
   - Execute for a reasonable duration
   - _Gotcha_: Allow time for warm up!
 
-- Don't stress test everything on every push - it's too heavy
+- Don't stress test everything on every push to main - it's too heavy
   - _But: K6 can be used for lightweight smoke tests too_
-- But don't test too irregularly that the results end up ignored
+- But don't test too irregularly (harder to find where the bad change was introduced)
 
 <!-- 
   Long execution time = heavy on the environment, and if it was every push you'd be waiting forever for your build to complete.
@@ -520,12 +510,6 @@ Writing: clean up to avoid impacting subsequent test runs
 ---
 
 # Example GHA Snippet
-<!-- View an example: https://github.com/AdrianLThomas/complexity-generator/actions/runs/14473130468/job/40592000591 
-
-
-See: 47 RPs - same as K6 output
-but..... p95 is different.
--->
 
 <style scoped>
 marp-pre {

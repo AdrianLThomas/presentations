@@ -607,17 +607,7 @@ In turn we also noticed it was impacting a bunch of other services and teams acr
 Repo contains: Basic API, Also the GitHub Action for running K6
 
 Any questions?
--->
 
----
-
-<!-- 
-TODO
-
-- Timings
-  - Trial run: does it all fit?
-  - Mark candidates for skipping if time required
 - Content
   - Look at config in GHA again if time.
-
  -->

@@ -122,7 +122,7 @@ p {
 ---
 
 
-*Anecdote: Pre go-live (CPU Throttling)*
+*Anecdote: Only just getting started (CPU Throttling)*
 
 <!-- 
 
@@ -505,7 +505,7 @@ Writing: clean up to avoid impacting subsequent test runs
   - Enables you to test for regressions
   - At least once a day (e.g. nightly cron)
   - Execute for a reasonable duration
-  - *Gotcha*: Allow time for warm up!
+  - _Gotcha_: Allow time for warm up!
 
 - Don't stress test everything on every push - it's too heavy
   - _But: K6 can be used for lightweight smoke tests too_
@@ -589,6 +589,16 @@ _In case of demo demons_
 
 ---
 
+*Anecdote: Rogue update*
+
+<!-- Once our tests were running nightly in CI, and things were stable. One morning, we spotted a performance drop. 
+
+Git-bisect-style: to find the issue and re-running the load tests helped me identify the issue.
+
+In turn we also noticed it was impacting a bunch of other services and teams across the organization (who were still scratching their heads). Unlikely suspect: a minor OTEL update dependabot merged! -->
+
+---
+
 # FIN!
 ## Summary
 - Importance of load testing, what it can do for you
@@ -603,20 +613,6 @@ _In case of demo demons_
   <!-- 
     Repo contains: Basic API, Also the GitHub Action for running K6
   -->
-
----
-
-*Anecdote: Bad dependabot update*
-
-<!-- Context: Once our tests were running nightly in CI, and things were stable. One morning, we spotted a performance drop. Git bisecting the issue and re-running the load tests helped me identify the issue, which was also impacting a bunch of other services and teams across the organization. It was a minor OTEL update dependabot introduced! -->
-
-TODO - where does this fit?
-
-
----
-*Anecdote: Residual Sidecar Impacting Scaling*
-
-TODO - where does this fit?
 
 ---
 
